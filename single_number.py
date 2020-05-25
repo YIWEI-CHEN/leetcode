@@ -23,7 +23,7 @@ class Solution2:
         return [*h][0]
 
 
-class Solution3:
+class FinalSolution:
     '''
     If we take XOR of zero and some bit, it will return that bit
     a^0 = a

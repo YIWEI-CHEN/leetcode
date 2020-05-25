@@ -1,7 +1,7 @@
 from typing import List
 
 
-class Solution1:
+class BFSolution1:
     # brute force solution
     def twoSum(self, nums: List[int], target: int) -> List[int]:
         for i, num in enumerate(nums):
@@ -35,13 +35,13 @@ class Solution3:
                 h[n] = i
 
 
-class Solution4:
+class GoodSolution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
         # 1 pass + hash: similar to solution 3, but no h[complement] != i
         '''
-
-        3 -> 1
-        2 -> 2
+        nums = [3, 2, 4], target = 6
+        3: 0
+        2: 1
         '''
         h = dict()
         for i, n in enumerate(nums):
@@ -52,12 +52,13 @@ class Solution4:
                 h[n] = i
 
 
-class Solution5:
+class FinalSolution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
         # hash will save the complement and index, rather than saving original num
         '''
-            3 -> 1
-            4 -> 2
+            nums = [3, 2, 4], target = 6
+            3 -> 3: 0
+            4 -> 2: 1
         '''
         h = {}  # save more time than dict()
         for i, n in enumerate(nums):
@@ -69,5 +70,5 @@ class Solution5:
 if __name__ == '__main__':
     nums = [3, 2, 4]
     target = 6
-    result = Solution5().twoSum(nums, target)
+    result = FinalSolution().twoSum(nums, target)
     print(result)
