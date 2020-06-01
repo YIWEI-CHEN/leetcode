@@ -1,0 +1,83 @@
+import collections
+
+
+# Definition for a binary tree node.
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+
+class IterSolution:
+    def invertTree(self, root: TreeNode) -> TreeNode:
+        if root is None:
+            return root
+        q = collections.deque([root])
+        while q:
+            node = q.popleft()
+            if node.right is not None:
+                q.append(node.right)
+            if node.left is not None:
+                q.append(node.left)
+            self.swap(node)
+        return root
+
+    def swap(self, node):
+        tmp = node.left
+        node.left = node.right
+        node.right = tmp
+
+
+class FinalSolution:
+    def invertTree(self, root: TreeNode) -> TreeNode:
+        if root is None:
+            return root
+        q = collections.deque([root])
+        while q:
+            n = q.popleft()
+            left = n.left
+            right = n.right
+            if left is None and right is None:
+                continue
+            if right is not None:
+                q.append(right)
+            if left is not None:
+                q.append(left)
+            n.left = right
+            n.right = left
+
+        return root
+
+
+class RecursiveSolution:
+    def invertTree(self, root: TreeNode) -> TreeNode:
+        if root is None:
+            return root
+        if root.left is None and root.right is None:
+            return root
+        if root.right is not None:
+            self.invertTree(root.right)
+        if root.left is not None:
+            self.invertTree(root.left)
+        self.swap(root)
+        return root
+
+    def swap(self, node):
+        tmp = node.left
+        node.left = node.right
+        node.right = tmp
+
+
+class BetterRecursiveSolution:
+    def invertTree(self, root: TreeNode) -> TreeNode:
+        if root is None:
+            return root
+
+        right = self.invertTree(root.right)
+        left = self.invertTree(root.left)
+        if left is None and right is None:
+            return root
+        root.left = right
+        root.right = left
+        return root
