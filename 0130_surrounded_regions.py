@@ -44,6 +44,48 @@ class DFSSolution:
                 reverse_max_region(row, col)
 
 
+class ConciseDFSSolution:
+    def solve(self, board: List[List[str]]) -> None:
+        """
+        Do not return anything, modify board in-place instead.
+        """
+        num_rows = len(board)
+        if num_rows == 0:
+            return
+        num_cols = len(board[0])
+        visited = [[False] * num_cols for _ in range(num_rows)]  # [[False] * num_cols] * num_row will cause unexpected memory sharing
+
+        def reverse_max_region(row, col):
+            stack = [(row, col)]
+            reverse_candidates = []
+            reverse = True
+            while stack:
+                row, col = stack.pop()
+                if row < 0 or row >= num_rows or col < 0 or col >= num_cols or visited[row][col]:
+                    continue
+                visited[row][col] = True
+                if board[row][col] == 'O':
+                    reverse_candidates.append((row, col))
+                    if row in [0, num_rows - 1] or col in [0, num_cols - 1]:
+                        reverse = False
+                    left, right = col - 1, col + 1
+                    up, down = row - 1, row + 1
+                    stack.append((row, right))
+                    stack.append((down, col))
+                    stack.append((row, left))
+                    stack.append((up, col))
+
+            if reverse:
+                for row, col in reverse_candidates:
+                    board[row][col] = 'X'
+
+        for row in range(num_rows):
+            for col in range(num_cols):
+                if board[row][col] == 'X':
+                    continue
+                reverse_max_region(row, col)
+
+
 if __name__ == '__main__':
     # board = [["X","X","X","X"],["X","O","O","X"],["X","X","O","X"],["X","O","X","X"]]
     # e = [["X","X","X","X"],["X","X","X","X"],["X","X","X","X"],["X","O","X","X"]]
@@ -53,6 +95,6 @@ if __name__ == '__main__':
     # e = [["O","O","O"],["O","O","O"],["O","O","O"]]
     board = [["X", "O", "X", "X"], ["O", "X", "O", "X"], ["X", "O", "X", "O"], ["O", "X", "O", "X"], ["X", "O", "X", "O"], ["O", "X", "O", "X"]]
     e = [["X","O","X","X"],["O","X","X","X"],["X","X","X","O"],["O","X","X","X"],["X","X","X","O"],["O","X","O","X"]]
-    DFSSolution().solve(board)
+    ConciseDFSSolution().solve(board)
     print(board)
     print(e == board)
