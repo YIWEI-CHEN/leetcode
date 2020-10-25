@@ -72,10 +72,21 @@ class BetterRecursiveSolution:
         if root is None:
             return root
 
-        right = self.invertTree(root.right)
         left = self.invertTree(root.left)
+        right = self.invertTree(root.right)
         if left is None and right is None:
             return root
         root.left = right
         root.right = left
+        return root
+
+
+class ConciseRecursiveSolution:
+    def invertTree(self, root: TreeNode) -> TreeNode:
+        if root is None:
+            return root
+
+        left = self.invertTree(root.left)
+        right = self.invertTree(root.right)
+        root.left, root.right = right, left
         return root
