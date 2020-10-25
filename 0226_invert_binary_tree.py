@@ -36,16 +36,14 @@ class FinalSolution:
         q = collections.deque([root])
         while q:
             n = q.popleft()
-            left = n.left
-            right = n.right
-            if left is None and right is None:
-                continue
+            left, right = n.left, n.right
+            # if left is None and right is None:
+            #     continue
             if right is not None:
                 q.append(right)
             if left is not None:
                 q.append(left)
-            n.left = right
-            n.right = left
+            n.left, n.right = right, left
 
         return root
 
