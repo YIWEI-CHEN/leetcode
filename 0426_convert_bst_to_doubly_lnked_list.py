@@ -11,14 +11,13 @@ class TreeNode:
         self.left, self.right = None, None
 
 
-class Solution:
+class TwoIterationSolution:
     """
     @param root: root of a tree
     @return: head node of a doubly linked list
     """
 
     def treeToDoublyList(self, root):
-        # Write your code here.
         stack = []
         current = root
         output = []
@@ -38,3 +37,33 @@ class Solution:
             output[i].right = output[successor]
             output[i].left = output[i - 1]
         return output[0]
+
+
+class OneIterationSolution:
+    """
+    @param root: root of a tree
+    @return: head node of a doubly linked list
+    """
+
+    def treeToDoublyList(self, root):
+        stack = []
+        current = root
+        head, prev = None, None
+        while True:
+            if current is not None:
+                stack.append(current)
+                current = current.left
+            elif stack:
+                current = stack.pop()
+                if head is None:
+                    head = current
+                if prev is not None:
+                    prev.right = current
+                    current.left = prev
+                prev = current
+                current = current.right
+            else:
+                break
+        head.left = prev
+        prev.right = head
+        return head
