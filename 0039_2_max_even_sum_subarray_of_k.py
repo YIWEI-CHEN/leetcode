@@ -55,25 +55,40 @@ class RecursiveBackTrackingSolution:
             return -1
         global res
         res = -1
-        def backtrack(level, start, k):
+        def backtrack(sub_arr, start, k):
             if k < 0:
                 return
-            lsum = sum(level)
+            lsum = sum(sub_arr)
             if k == 0 and not lsum & 1:
                 global res
                 res = max(res, lsum)
                 return
             for i in range(start, len(A)):
-                level.append(A[i])
-                backtrack(level, i + 1, k - 1)
-                level.pop()
+                sub_arr.append(A[i])
+                backtrack(sub_arr, i + 1, k - 1)
+                sub_arr.pop()
 
         backtrack([], 0, K)
         return res
 
 
 class IterativeBackTrackingSolution:
-    pass
+    def maxEvenSumSubarray(self, A, K) -> int:
+        if len(A) < K:
+            return -1
+        stack = [([], 0, K)]
+        ans = -1
+        while stack:
+            sub_arr, start, curr_k = stack.pop()
+            if curr_k < 0:
+                continue
+            tmp_sum = sum(sub_arr)
+            if curr_k == 0 and not tmp_sum & 1:
+                ans = max(ans, tmp_sum)
+                continue
+            for i in range(start, len(A)):
+                stack.append((sub_arr + [A[i]], i + 1, curr_k - 1))
+        return ans
 
 
 if __name__ == '__main__':
@@ -84,5 +99,5 @@ if __name__ == '__main__':
         ([10000], 2, -1),
         ([2, 3, 3, 5, 5], 3, 12),
     ]:
-        ans = Solution().maxEvenSumSubarray(A, K)
+        ans = IterativeBackTrackingSolution().maxEvenSumSubarray(A, K)
         print(ans == expected)
