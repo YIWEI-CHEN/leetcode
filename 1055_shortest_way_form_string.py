@@ -29,6 +29,11 @@ class Solution:
 if __name__ == '__main__':
     source = 'abcab'
     target = 'aabbaac'
+    '''
+        aab, ba, ac is the sub-sequence of source
+        They are the maximal sub-string of target,
+        which can concatenate as the target.
+    '''
     e = 3
     o = Solution().shortestWay(source, target)
     print(o)
