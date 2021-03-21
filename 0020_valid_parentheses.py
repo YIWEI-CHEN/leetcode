@@ -30,8 +30,10 @@ class FinalSolution:
             if c in mapping:
                 stack.append(c)
             else:
-                top = stack.pop() if stack else None
-                if top is None or mapping[top] != c:
+                if not stack:
+                    return False
+                top = stack.pop()
+                if mapping[top] != c:
                     return False
         return not stack
 
