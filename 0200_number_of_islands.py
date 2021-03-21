@@ -19,12 +19,12 @@ class Solution:
                 visited[x][y] = True
                 if grid[x][y] == '1':
                     grid[x][y] = '0'
-                    left, right = x - 1, x + 1
-                    top, down = y - 1, y + 1
-                    queue.append((left, y))
-                    queue.append((right, y))
-                    queue.append((x, top))
-                    queue.append((x, down))
+                    top, down = x - 1, x + 1
+                    left, right = y - 1, y + 1
+                    queue.append((x, left))
+                    queue.append((x, right))
+                    queue.append((top, y))
+                    queue.append((down, y))
 
         num_island = 0
         for row in range(num_rows):
