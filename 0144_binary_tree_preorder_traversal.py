@@ -9,7 +9,7 @@ class TreeNode:
         self.right = right
 
 
-class Solution:
+class RecursiveSolution:
     def preorderTraversal(self, root: TreeNode) -> List[int]:
         # iterative
         # stack, seq = [root], []
@@ -33,4 +33,16 @@ class Solution:
             helper(node.right)
 
         helper(root)
+        return output
+
+
+class IterativeSolution:
+    def preorderTraversal(self, root: TreeNode) -> List[int]:
+        stack, output = [root], []
+        while stack:
+            n = stack.pop()
+            if n is not None:
+                output.append(n.val)
+                stack.append(n.right)
+                stack.append(n.left)
         return output
