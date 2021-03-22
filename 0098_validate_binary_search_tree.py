@@ -44,3 +44,26 @@ class InOrderSolution:
             last_element = node.val
             root = node.right
         return True
+
+
+class SingleLoopInOrderSolution:
+    def isValidBST(self, root: TreeNode) -> bool:
+        # DFS + in-order, will convert a BST to a ascending sorted sequece
+        # If the sequece is not sorted, the BST is invalid
+        # Key point for DFS implementation is to push node to the stack until the node's left is None
+        # Then pop the stack and push the popped node's right to the stack until its left is None
+        stack, last_element = [], float('-inf')
+        current = root
+        while True:
+            if current is not None:
+                stack.append(current)
+                current = current.left
+            elif stack:
+                current = stack.pop()
+                if current.val <= last_element:
+                    return False
+                last_element = current.val
+                current = current.right
+            else:
+                break
+        return True
