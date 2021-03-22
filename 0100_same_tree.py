@@ -18,15 +18,21 @@ class InOrderSolution:
             seq = []
             while stack:
                 node = stack.pop()
-                seq.append(node.val)
-                if not node.left and not node.right:
-                    continue
-                if node.left is None:
+                if node is None:
                     seq.append(None)
-                else:
-                    stack.append(node.left)
-                if node.right is not None:
-                    stack.append(node.right)
+                    continue
+                seq.append(node.val)
+                stack.append(node.right)
+                stack.append(node.left)
+                # seq.append(node.val)
+                # if not node.left and not node.right:
+                #     continue
+                # if node.left is None:
+                #     seq.append(None)
+                # else:
+                #     stack.append(node.left)
+                # if node.right is not None:
+                #     stack.append(node.right)
             return seq
         p_seq = preorder(p)
         q_seq = preorder(q)
