@@ -47,6 +47,19 @@ class FinalSolution:
 
         return root
 
+class ConciseIterationSolution:
+    def invertTree(self, root: TreeNode) -> TreeNode:
+        q = collections.deque([root])
+        while q:
+            n = q.popleft()
+            if n is None:
+                continue
+            left, right = n.left, n.right
+            q.append(left)
+            q.append(right)
+            n.left, n.right = right, left
+        return root
+
 
 class RecursiveSolution:
     def invertTree(self, root: TreeNode) -> TreeNode:
