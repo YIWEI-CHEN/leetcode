@@ -7,9 +7,10 @@ class CountSolution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        cnt = collections.defaultdict(int)
-        for n in nums:
-            cnt[n] += 1
+        # cnt = collections.defaultdict(int)
+        # for n in nums:
+        #     cnt[n] += 1
+        cnt = collections.Counter(nums)
         idx = 0
         for color in range(3):
             count = cnt[color]
@@ -44,6 +45,6 @@ if __name__ == '__main__':
     # e = [0, 0, 1, 1, 2, 2]
     nums = [1, 2, 0]
     e = [0, 1, 2]
-    OnePassSolution().sortColors(nums)
+    CountSolution().sortColors(nums)
     print(nums)
     print(nums == e)
