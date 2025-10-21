@@ -63,6 +63,7 @@ class BitManipulationSolution:
 
     Time complexity: O(n)
     Space complexity: O(1)
+    
     Recommended solution
     '''
     def singleNumber(self, nums: List[int]) -> int:
