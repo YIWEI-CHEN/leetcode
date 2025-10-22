@@ -1,3 +1,15 @@
+"""
+Invert Binary Tree
+
+Easy
+
+Links:
+1. NeetCode 150: https://neetcode.io/problems/invert-binary-tree
+2. LeetCode: https://leetcode.com/problems/invert-binary-tree/
+
+You are given the root of a binary tree root. Invert the binary tree and return its root.
+"""
+
 import collections
 
 
@@ -29,23 +41,26 @@ class IterSolution:
         node.right = tmp
 
 
-class FinalSolution:
+class BreadthFirstSearchSolution:
+    """
+    Time complexity: O(N)
+    Space complexity: O(N)
+    
+    Recommended solution.
+    """
     def invertTree(self, root: TreeNode) -> TreeNode:
         if root is None:
             return root
         q = collections.deque([root])
         while q:
             n = q.popleft()
-            left, right = n.left, n.right
-            # if left is None and right is None:
-            #     continue
-            if right is not None:
-                q.append(right)
-            if left is not None:
-                q.append(left)
-            n.left, n.right = right, left
-
+            n.left, n.right = n.right, n.left
+            if n.left:
+                q.append(n.left)
+            if n.right:
+                q.append(n.right)
         return root
+
 
 class ConciseIterationSolution:
     def invertTree(self, root: TreeNode) -> TreeNode:
