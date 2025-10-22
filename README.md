@@ -13,7 +13,7 @@ If you find this repository helpful in your interview preparation or research, p
   year={2025},
   publisher={GitHub},
   journal={GitHub repository},
-  howpublished={\url{https://github.com/YIWEI-CHEN/leetcode}}
+  howpublished={\url{https://github.com/YIWEI-CHEN/coding-interview-prep}}
 }
 ```
 
